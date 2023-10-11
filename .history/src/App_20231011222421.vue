@@ -13,6 +13,7 @@
     <a v-for="a in 메뉴들" :key="a">{{a}}</a>
   </div>
   <div v-for="(oneRoom,i) in 원룸들" :key="i">
+
     <img :src="oneRoom.image" class="room-img"/>
     <h4 @click="모달창열렸니=true">{{oneRoom.title}} </h4>
     <p>{{oneRoom.price}} 원</p>

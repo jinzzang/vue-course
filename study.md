@@ -1,0 +1,39 @@
+동적인 UI만드는 법:
+0. HTML CSS로 디자인하기
+1. UI의 현재 상태를 데이터로 저장해둠
+2. 데이터에따라 UI가 어떻게보일지 작성
+
+<div class="black-bg" v-if="모달창열렸니==true">
+이런식으로 if문을 사용한다.
+
+변수 내보내기
+ex1)
+var apple = 10;
+
+export default apple;
+
+/////////////////////////////////
+
+import apple from 경로
+
+ex2)
+
+var apple = 10;
+var apple2 = 100;
+
+export {apple, apple2}
+
+///////////////////////////////////
+
+import {apple,apple2} from '.';
+
+HTML 태그안의 속성 데이터바인딩은 :
+ex)<img :src="원룸들[0].image" class="room-img"/>
+
+HTML 태그안의 내용 데이터바인딩은 
+ex) <h4 @click="모달창열렸니=true">{{원룸들[0].title}} </h4>
+
+
+
+https://codingapple.com/
+

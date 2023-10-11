@@ -12,25 +12,40 @@
   <div class="menu">
     <a v-for="a in 메뉴들" :key="a">{{a}}</a>
   </div>
-  <div v-for="(oneRoom,i) in 원룸들" :key="i">
-    <img :src="oneRoom.image" class="room-img"/>
-    <h4 @click="모달창열렸니=true">{{oneRoom.title}} </h4>
-    <p>{{oneRoom.price}} 원</p>
+  <div>
+    <img src="./assets/room0.jpg" class="room-img"/>
+    <h4 @click="모달창열렸니=true">{{products[0]}} </h4>
+    <p>50 만원</p>
+    <button @click="신고수[0]++">허위매물</button>
+    <span> 신고수 ㅣ {{신고수[0]}}</span>
   </div>
-
-
-
+  <div>
+    <img src="./assets/room1.jpg" class="room-img"/>
+    <h4>{{products[1]}}</h4>
+    <p>50 만원</p>
+    <button @click="신고수[1]++">허위매물</button>
+    <span> 신고수 ㅣ {{신고수[1]}}</span>
+  </div>
+  <div>
+    <img src="./assets/room2.jpg" class="room-img"/>
+    <h4>{{products[2]}}</h4>
+    <p>50 만원</p>
+    <button @click="신고수[2]++">허위매물</button>
+    <span> 신고수 ㅣ {{신고수[2]}}</span>
+  </div>
 </template>
 
 <script>
 
-import data from './oneroom.js';
+
 export default {
   name: 'App',
   data(){
     return {
       모달창열렸니 : false,
-      원룸들:data
+      products:['관악 원룸','강남 원룸','오산 원룸'],
+      신고수:[0,0,0],
+      메뉴들:['사과','바나나','오랜지']
     }
   }
 
