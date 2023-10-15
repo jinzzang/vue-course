@@ -3,10 +3,8 @@
   <div class="" v-if="1 == 2">조진호</div>
   <div class="" v-else-if="1 < 3">큼</div>
   <div class="" v-else>입니다.</div>
-
-  <Transition name="fade">
-    <ModalOneRoom :원룸들="원룸들" :원룸="원룸" :모달창열렸니="모달창열렸니" @closeModal="모달창열렸니=false"/>
-  </Transition>
+  
+  <ModalOneRoom :원룸들="원룸들" :원룸="원룸" :모달창열렸니="모달창열렸니"/>
 
 
   <div class="menu">
@@ -15,7 +13,7 @@
 
   <DiscountOneRoom />
 
-  <OneRoom1 :oneRoom="oneRoom" v-for="(oneRoom,i) in 원룸들" :key="i" @openModal="모달창열렸니=true; 원룸=$event"/>
+  <OneRoomList :원룸들="원룸들" />
 
 
 
@@ -24,18 +22,17 @@
 <script>
 import DiscountOneRoom from './DiscountOneRoom.vue';
 import ModalOneRoom from './ModalOneRoom.vue';
-import OneRoom1 from './OneRoom1.vue';
+import OneRoomList from './OneRoomList.vue';
 
 import data from './oneroom.js';
 export default {
-  components: { DiscountOneRoom, ModalOneRoom ,OneRoom1},
+  components: { DiscountOneRoom, ModalOneRoom ,OneRoomList},
   name: 'App',
   data(){
     return {
       모달창열렸니 : false,
       원룸들:data,
-      원룸:0,
-      메뉴들:['ㅁ','ㅠ','ㅇ']
+      원룸:0
     }
   }
 
@@ -88,36 +85,5 @@ div{
 .room-img{
  width:100%;
  margin-top:40px;
-}
-
-
-.start{
-  opacity: 0;
-  transition: all 1s;
-}
-
-.end{
-  opacity: 1;
-}
-
-.fade-enter-from{
-  opacity: 0;
-
-}
-.fade-enter-active{
-  transition: all 2s;
-}
-.fade-enter-to{
-  opacity: 1;
-}
-.fade-leave-from{
-  opacity: 1;
-
-}
-.fade-leave-active{
-  transition: all 2s;
-}
-.fade-leave-to{
-  opacity: 0;
 }
 </style>

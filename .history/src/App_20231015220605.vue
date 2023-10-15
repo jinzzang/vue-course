@@ -3,7 +3,7 @@
   <div class="" v-if="1 == 2">조진호</div>
   <div class="" v-else-if="1 < 3">큼</div>
   <div class="" v-else>입니다.</div>
-
+  
   <Transition name="fade">
     <ModalOneRoom :원룸들="원룸들" :원룸="원룸" :모달창열렸니="모달창열렸니" @closeModal="모달창열렸니=false"/>
   </Transition>
@@ -102,22 +102,12 @@ div{
 
 .fade-enter-from{
   opacity: 0;
-
+  
 }
 .fade-enter-active{
   transition: all 2s;
 }
 .fade-enter-to{
   opacity: 1;
-}
-.fade-leave-from{
-  opacity: 1;
-
-}
-.fade-leave-active{
-  transition: all 2s;
-}
-.fade-leave-to{
-  opacity: 0;
 }
 </style>
