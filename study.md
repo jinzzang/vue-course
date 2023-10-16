@@ -207,4 +207,103 @@ ex)
   opacity: 0;
 }
 
-///상품정렬기능과 데이터 원본 보존
+### 상품정렬기능과 데이터 원본 보존
+정렬 : 데이터만 정렬하면 알아서 된다.
+
+
+this.oneRooms.sort((a,b)=>b.price-a.price); // sort함수를 원본 변형, map,filter는 원본을 보존해줌. 원본 데이터를 보존해주는게 유행이다.
+원본데이터, 정렬데이터 이렇게 2가지를 만들면 된다.
+
+ data(){
+    return {
+      oneRoomsOri:data,
+      oneRooms:data
+    }
+  }
+
+이런식으로 똑같은 data를 넣으면 각각의 data가 아니라 하나의 data로 공유한다. 그러므로 사본을 만들어야 한다.
+사본만들기 : [...data]   // ...은 spread operator로 배열이나 , 객체의 앞의 붙이는 {}, [] 겉옷을 벗겨준다. 1,2,3이 남는데 여기서 다시 [] 배열을 씌워주면 새로운 배열이 만들어지므로 복사다 되는것이다.
+
+
+### Vue의 라이프사이클을 어디다 쓰냐면
+
+컴포넌트는 웹페이지에 표기되기 전까지 일련의 step을 거친다.
+create 단계 : 데이터만 있는 단계 
+mount 단계 : template안에 있는 코드를 html로 만들어줌
+컴포넌트 생성
+update : data가 변하면 컴포넌트가 재렌더링 되는것이다.
+unmount : 컴포넌트가 삭제되면
+
+lifecycle hook : 라이프사이클안에 코드를 넣을 수 있다.
+
+
+setTimeout(()=>{
+      this.showDiscount=false;
+    },2000);
+
+function이 아니라 arrow function을 사용해야한다. 이유는 this를 잘 가져온다는데 정확히는 모르겟뜸...
+
+서버에서 데이터를 가져올떄 ajax를 쓸 떄 created, mounted에서 자주 사용함
+
+### Blog 프로젝트 생성과 뷰에서 Bootstrap 4, 5 사용법
+설치방법
+CDN
+https://getbootstrap.com/docs/4.6/getting-started/introduction/
+
+npm install bootstrap@5.3.2
+
+main.js
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+입력하기
+
+### vue-router 설치와 기본 라우팅
+
+npm install vue-router@4
+
+라우터 사용법 
+1. createApp(App).use(라우터만든거).mount('#app')
+위처럼 만들수 있지만 라우터 코드가 너무 길기때문에 다른 파일에 만들고 가져온다.
+router.js 파일에 아래 코드 입력
+
+2. import { createWebHistory, createRouter } from "vue-router";
+
+const routes = [
+  {
+    path: "/경로",
+    component: import해온 컴포넌트,
+  }
+];
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
+
+export default router; 
+
+3. <router-view></router-view>
+
+1. 페이지를 나누고 싶으면 컴포넌트 만들기
+2. {} url 만들기
+3. props 전송을 <router-view>에 전송하기.
+
+a태그같은 router-link가 있다.
+ex) <router-link to="/blogContents[0]/detail"><h5>{{blogContents[0].title}}</h5></router-link> 이런식으로 사용함.
+
+
+### 상세페이지 200만개 만들기 (URL 파라미터)
+
+
+mt-4 margin-top 4만큼 주기
+URL 파라미터 문법
+{
+    path:"/detail/:id",             //path:"/detail/:id(//d+)", 이런식으로 정규식도 가능하다.
+    component:Detail
+  }
+  이런식으로 router를 쪼갤 수 있다.
+
+$route 여기에 URL의 모든 정보가 들어있다. 
+$route..params.id 이런식으로 URL 파라미터를 가지고 올 수 있다.
+
+### 심심할까봐 소개하는 Nested routes & push 함수

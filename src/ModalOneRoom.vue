@@ -1,12 +1,12 @@
 <template>
-<div class="black-bg" v-if="모달창열렸니==true" >
+<div class="black-bg" v-if="modal==true" >
     <div class="white-bg">
-      <h4>{{원룸들[원룸].title}}</h4>
-      <img :src="원룸들[원룸].image">
-      <p>{{원룸들[원룸].content}}</p>
-      <p>{{원룸들[원룸].price}}</p>
+      <h4>{{oneRooms[oneroom].title}}</h4>
+      <img :src="oneRooms[oneroom].image">
+      <p>{{oneRooms[oneroom].content}}</p>
+      <p>{{oneRooms[oneroom].price}}</p>
       <input v-model.number="month">
-      <p>{{month}}개월 선택 : {{원룸들[원룸].price+month}}</p>
+      <p>{{month}}개월 선택 : {{oneRooms[oneroom].price*month}}</p>
       <button @click="closeModal">닫기</button>
     </div>
   </div>
@@ -17,29 +17,23 @@ export default {
   name:'ModalOneRoom',
   data(){
     return {
-      month: 1
-    }
-  },
-  watch:{
-    month(a){
-      if(a>12){
-        alert("fuck me");
-        this.month=1;
-      }
-      if(isNaN(a)==true){
-        alert("숫자만 입력하세요.");
-        console.log(a);
-      }
+      month:3
     }
   },
   props:{
-    원룸들: Array,
-    원룸:Number,
-    모달창열렸니:Boolean
+    oneRooms: Array,
+    oneroom:Number,
+    modal:Boolean
   },
   methods:{
     closeModal(){
       this.$emit("closeModal");
+    }
+  },
+  beforeUpdate(){
+    if(this.month<3){
+      alert('최소 3개월부터 계약 가능합니다.');
+      this.month=3;
     }
   }
 }

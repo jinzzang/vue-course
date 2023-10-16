@@ -1,21 +1,19 @@
 <template>
-
-  <div class="" v-if="1 == 2">조진호</div>
-  <div class="" v-else-if="1 < 3">큼</div>
-  <div class="" v-else>입니다.</div>
-
   <Transition name="fade">
-    <ModalOneRoom :원룸들="원룸들" :원룸="원룸" :모달창열렸니="모달창열렸니" @closeModal="모달창열렸니=false"/>
+    <ModalOneRoom :oneRooms="oneRooms" :oneroom="oneroom" :modal="modal" @closeModal="modal=false"/>
   </Transition>
 
 
   <div class="menu">
-    <a v-for="a in 메뉴들" :key="a">{{a}}</a>
+    <a v-for="a in menu" :key="a">{{a}}</a>
   </div>
 
-  <DiscountOneRoom />
+  <DiscountOneRoom :discountValue="discountValue" v-if=" showDiscount == true "/>
 
-  <OneRoom1 :oneRoom="oneRoom" v-for="(oneRoom,i) in 원룸들" :key="i" @openModal="모달창열렸니=true; 원룸=$event"/>
+  <button @click="printSort()">가격순버튼</button>
+  <button @click="sortBack()">되돌리기</button>
+  <OneRoom1 :oneRoom="oneRoom" v-for="(oneRoom,i) in oneRooms" :key="i" @openModal="modal=true; oneroom=$event"/>
+
 
 
 
@@ -32,11 +30,29 @@ export default {
   name: 'App',
   data(){
     return {
-      모달창열렸니 : false,
-      원룸들:data,
-      원룸:0,
-      메뉴들:['ㅁ','ㅠ','ㅇ']
+      showDiscount:true,
+      modal : false,
+      oneRoomsOri:[...data],
+      oneRooms:data,
+      oneroom:0,
+      menu:['Home','Shop','About'],
+      discountValue:30
     }
+  },
+  methods:{
+      printSort(){
+        this.oneRooms.sort((a,b)=>b.price-a.price);
+      },
+      sortBack(){
+        this.oneRooms=[...this.oneRoomsOri];
+      }
+  },
+  mounted(){
+    setInterval(() => {
+      if(this.discountValue>0){
+          this.discountValue--;
+      }
+    }, 1000);
   }
 
 };
@@ -121,3 +137,4 @@ div{
   opacity: 0;
 }
 </style>
+
